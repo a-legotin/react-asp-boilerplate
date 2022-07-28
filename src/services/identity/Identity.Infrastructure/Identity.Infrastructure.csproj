@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>Identity.Infrastructure</RootNamespace>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Autofac" Version="6.3.0" />
+        <PackageReference Include="AutoMapper" Version="11.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.15.1" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\common\Infrastructure\Infrastructure.csproj" />
+      <ProjectReference Include="..\Identity.Core\Identity.Core.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Migrations" />
+    </ItemGroup>
+
+</Project>

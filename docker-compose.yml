@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  identity:
+    image: identity
+    build:
+      context: .
+      network: host
+      dockerfile: src/services/identity/Identity/Dockerfile
+    restart: on-failure
+    deploy:
+      replicas: 1
+    networks:
+      - main-network
+    ports:
+      - "9091:9091"
+ 
+networks:
+  main-network:
+    driver: bridge
