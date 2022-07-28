@@ -23,6 +23,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "environment", "environment"
 		..\docker-compose.yml = ..\docker-compose.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{7D3925AC-F5FC-4471-994E-973F5A142D35}"
+	ProjectSection(SolutionItems) = preProject
+		..\deploy\deployment.yaml = ..\deploy\deployment.yaml
+		..\deploy\ingress.yaml = ..\deploy\ingress.yaml
+		..\deploy\namespace.yaml = ..\deploy\namespace.yaml
+		..\deploy\service.yaml = ..\deploy\service.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
