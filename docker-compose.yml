@@ -1,12 +1,25 @@
 version: '3.4'
 
 services:
-  identity:
-    image: identity
+  react-asp-boilerplate-identity:
+    image: react-asp-boilerplate-identity
     build:
       context: .
       network: host
       dockerfile: src/services/identity/Identity/Dockerfile
+    restart: on-failure
+    deploy:
+      replicas: 1
+    networks:
+      - main-network
+    ports:
+      - "9090:9090"
+  react-asp-boilerplate-web:
+    image: react-asp-boilerplate-web
+    build:
+      context: src/app/.
+      network: host
+      dockerfile: Dockerfile
     restart: on-failure
     deploy:
       replicas: 1

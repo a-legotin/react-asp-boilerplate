@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: react-asp-boilerplate
+  labels:
+    name: react-asp-boilerplate

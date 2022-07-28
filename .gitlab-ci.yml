@@ -1,6 +1,8 @@
 stages:
   - build-net
+  - build-app
   - build-images
+  - deploy
 
 cache:
   paths:
@@ -24,6 +26,19 @@ build-net:
     - dotnet restore src/ReactAspBoilerplate.sln
     - dotnet build src/ReactAspBoilerplate.sln -c Release
 
+build-app:
+  stage: build-app
+  tags:
+    - k8s
+  image: node:16-alpine3.11
+  script:
+    - node -v
+    - npm -v
+    - cd src/app
+    - npm --force install -g yarn
+    - yarn --non-interactive
+    - yarn build --non-interactive
+
 build-images:
   stage: build-images
   tags:
@@ -36,6 +51,8 @@ build-images:
     - echo "Building docker images"
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker-compose build
-    - docker tag identity:latest $CI_REGISTRY_IMAGE/identity:latest
+    - docker tag react-asp-boilerplate-identity:latest $CI_REGISTRY_IMAGE/react-asp-boilerplate-identity:latest
+    - docker tag react-asp-boilerplate-web:latest $CI_REGISTRY_IMAGE/react-asp-boilerplate-web:latest
     - echo "Pushing docker images to registry"
-    - docker push $CI_REGISTRY_IMAGE/identity:latest
+    - docker push $CI_REGISTRY_IMAGE/react-asp-boilerplate-identity:latest
+    - docker push $CI_REGISTRY_IMAGE/react-asp-boilerplate-web:latest

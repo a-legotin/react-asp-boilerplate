@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-asp-boilerplate-web
+  labels:
+    app: react-asp-boilerplate
+spec:
+  type: ClusterIP
+  selector:
+    app: react-asp-boilerplate-web
+  ports:
+    - port: 80
