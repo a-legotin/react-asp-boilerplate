@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: react-asp-boilerplate-web
-          image: registry.codegarage.ru/codegarage/instacrafter/instacrafter-react
+          image: registry.codegarage.ru/codegarage/react-asp-boilerplate/react-asp-boilerplate-web
           imagePullPolicy: Always
           ports:
             - containerPort: 80

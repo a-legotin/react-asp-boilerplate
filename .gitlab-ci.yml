@@ -56,3 +56,22 @@ build-images:
     - echo "Pushing docker images to registry"
     - docker push $CI_REGISTRY_IMAGE/react-asp-boilerplate-identity:latest
     - docker push $CI_REGISTRY_IMAGE/react-asp-boilerplate-web:latest
+
+deploy:
+  stage: deploy
+  image: bitnami/kubectl:latest
+  tags:
+    - k8s
+  environment:
+    name: staging
+  script:
+    - echo "Creating namespace, it might exists already, so force!"
+    - kubectl apply -f deploy/k8s/namespace.yaml
+    - echo "Clean up"
+    - kubectl delete all --all -n react-asp-boilerplate
+    - echo "Adding Gitlab registry credentials"
+    - kubectl delete secret docker-registry registry-credentials --ignore-not-found --namespace=react-asp-boilerplate
+    - kubectl create secret docker-registry registry-credentials --docker-server=$CI_REGISTRY --docker-username=$CG_DEPLOY_USR --docker-password=$CG_DEPLOY_PWD --docker-email=$GITLAB_USER_EMAIL --namespace=react-asp-boilerplate
+    - echo "Deploy to staging environment. You must supply credentials already!"
+    - kubectl apply -f deploy/k8s/deployment.yaml -f deploy/k8s/service.yaml -f deploy/k8s/ingress.yaml --namespace=react-asp-boilerplate
+    - kubectl rollout restart deployment react-asp-boilerplate-web-deployment --namespace=react-asp-boilerplate
